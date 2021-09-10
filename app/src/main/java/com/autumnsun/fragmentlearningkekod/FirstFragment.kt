@@ -14,14 +14,14 @@ import coil.transform.RoundedCornersTransformation
 import com.autumnsun.fragmentlearningkekod.databinding.FragmentFirstBinding
 import kotlinx.coroutines.delay
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM3 = "param3"
 
 class FirstFragment : BaseFragmentApplication() {
-    private var param1: String? = null
-    private var param2: String? = null
+    private var newsLogo: String? = null
+    private var newsTitle: String? = null
+    private var newsPhoto: String? = null
     private var _binding: FragmentFirstBinding? = null
     private val binding get() = _binding!!
     private var isFallowing = false;
@@ -32,8 +32,9 @@ class FirstFragment : BaseFragmentApplication() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            newsLogo = it.getString(ARG_PARAM1)
+            newsTitle = it.getString(ARG_PARAM2)
+            newsPhoto = it.getString(ARG_PARAM3)
         }
     }
 
@@ -42,16 +43,20 @@ class FirstFragment : BaseFragmentApplication() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
-
-        binding.newsTitle.text =
-            "Koronavirüse karşı 3. doz BionTech aşısı ne zaman başlayacak? İşte 'hatırlatma' dozu planı"
-        binding.newsAgencyImageView.load("https://seeklogo.com/images/H/haberturk-tv-ve-gazete-logo-E6E5B3CEE6-seeklogo.com.png") {
+        binding.newsAgencyImageView.load(newsLogo) {
             crossfade(true)
         }
-        binding.newsImageView.load("https://i4.hurimg.com/i/hurriyet/75/750x422/613acf0d4e3fe10e80151830.jpg") {
+        binding.newsImageView.load(newsPhoto) {
             crossfade(true)
             crossfade(1000)
         }
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.newsTitle.text = newsTitle
 
         binding.followButton.setOnClickListener {
             if (!isFallowing) {
@@ -99,18 +104,17 @@ class FirstFragment : BaseFragmentApplication() {
             bottomSheetFragment.show(mainActivity.supportFragmentManager, "BottomSheetDialog")
         }
 
-
-        return binding.root
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(newsLogo: String, newsTitle: String, newsPhoto: String) =
             FirstFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_PARAM1, newsLogo)
+                    putString(ARG_PARAM2, newsTitle)
+                    putString(ARG_PARAM3, newsPhoto)
                 }
             }
     }

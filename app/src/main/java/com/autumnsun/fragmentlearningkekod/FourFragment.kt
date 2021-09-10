@@ -12,19 +12,24 @@ import com.autumnsun.fragmentlearningkekod.databinding.FragmentSecondBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM3 = "param3"
+private const val ARG_PARAM4 = "param4"
 
 class FourFragment : BaseFragmentApplication() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var imagePhoto: String? = null
+    private var titleText: String? = null
+    private var descriptionText: String? = null
+    private var titleActionBar: String? = null
     private var _binding: FragmentFourBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            imagePhoto = it.getString(ARG_PARAM1)
+            titleText = it.getString(ARG_PARAM2)
+            descriptionText = it.getString(ARG_PARAM3)
+            titleActionBar = it.getString(ARG_PARAM4)
         }
     }
 
@@ -34,12 +39,15 @@ class FourFragment : BaseFragmentApplication() {
     ): View? {
         _binding = FragmentFourBinding.inflate(inflater, container, false)
 
-        binding.detailNewsFourFragment.load("https://i4.hurimg.com/i/hurriyet/75/750x422/613acf0d4e3fe10e80151830.jpg") {
+        binding.detailNewsFourFragment.load(imagePhoto) {
             crossfade(true)
             crossfade(1000)
         }
 
-        setToolBarTitle("Koronavirüs")
+        binding.detailNewsTitleFourFragment.text=descriptionText
+
+
+        titleActionBar?.let { setToolBarTitle(it) }
 
 
         return binding.root
@@ -47,11 +55,18 @@ class FourFragment : BaseFragmentApplication() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(
+            imagePhoto: String,
+            titleText: String,
+            descriptionText: String,
+            titleActionBar: String
+        ) =
             FourFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_PARAM1, imagePhoto)
+                    putString(ARG_PARAM2, titleText)
+                    putString(ARG_PARAM3, descriptionText)
+                    putString(ARG_PARAM4, titleActionBar)
                 }
             }
     }

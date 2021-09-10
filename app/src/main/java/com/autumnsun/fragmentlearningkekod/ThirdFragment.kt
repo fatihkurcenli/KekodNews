@@ -5,21 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import coil.load
+import com.autumnsun.fragmentlearningkekod.databinding.FragmentThirdBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private const val ARG_PARAM3 = "param3"
+private const val ARG_PARAM4 = "param4"
 
 
 class ThirdFragment : BaseFragmentApplication() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var title: String? = null
+    private var photo1: String? = null
+    private var photo2: String? = null
+    private var photo3: String? = null
+    private var _binding: FragmentThirdBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            title = it.getString(ARG_PARAM1)
+            photo1 = it.getString(ARG_PARAM2)
+            photo2 = it.getString(ARG_PARAM3)
+            photo3 = it.getString(ARG_PARAM4)
         }
     }
 
@@ -27,19 +36,46 @@ class ThirdFragment : BaseFragmentApplication() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_third, container, false)
+        _binding = FragmentThirdBinding.inflate(inflater, container, false)
+
+        binding.firstView.load(photo1) {
+            crossfade(true)
+            crossfade(1000)
+        }
+
+        binding.secondView.load(photo2) {
+            crossfade(true)
+            crossfade(1000)
+        }
+
+        binding.thirdView.load(photo3) {
+            crossfade(true)
+            crossfade(1000)
+        }
+
+        binding.titleCar.text = title
+
+
+
+        return binding.root
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(title: String, photo1: String, photo2: String, photo3: String) =
             ThirdFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_PARAM1, title)
+                    putString(ARG_PARAM2, photo1)
+                    putString(ARG_PARAM3, photo2)
+                    putString(ARG_PARAM4, photo3)
                 }
             }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

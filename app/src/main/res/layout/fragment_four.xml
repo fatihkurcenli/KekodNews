@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".FourFragment">
+
+            <ImageView
+                android:id="@+id/detail_news_four_fragment"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/detail_news_title_four_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="İlk doz BioNTech aşıları nisanda, ikinci dozlar haziranda yapıldı. İkinci BioNTech’i 5-6 ay önce olanlar, kasımdan başlayarak ‘hatırlatma’ dozu, yani üçüncü BioNTech aşısını olacak."
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/detail_news_haber"
+                android:textSize="17sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</layout>
